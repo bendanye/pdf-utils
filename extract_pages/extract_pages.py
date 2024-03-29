@@ -24,7 +24,7 @@ if __name__ == "__main__":
     page_builder = PageBuilder()
 
     # Examples
-    pdf_file_path = "AWS Certified Cloud Practitioner Slides v10.pdf"
+    pdf_file_path = "mypdf.pdf"
     pages = (
         page_builder.add_page(56)
         .add_page(91)
