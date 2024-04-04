@@ -13,7 +13,7 @@ pip install -r requirements.txt
 ## Running
 
 ```shell
-python3 extract_pages.pf
+python3 extract_pages.py
 ```
 
 ## Credit
