@@ -13,5 +13,5 @@ pip install -r requirements.txt
 ## Running
 
 ```shell
-python3 merge_pdf.pf
+python3 merge_pdf.py
 ```
