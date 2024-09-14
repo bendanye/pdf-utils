@@ -13,7 +13,7 @@ pip install -r requirements.txt
 ## Running
 
 ```shell
-python3 extract_pages.py
+streamlit run ui.py
 ```
 
 ## Credit
