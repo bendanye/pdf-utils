@@ -12,13 +12,13 @@ def extract_pdf(pdf_file_path: str, pages: List) -> str:
     for page in pages:
         if type(page) is PageSingle:
             page_builder.add_page_single(page.single_page)
-        else:
+        elif type(page) is PageRange:
             page_builder.add_page_range(page.from_page, page.to_page)
 
-    return extract(pdf_file_path, page_builder.build())
+    return _extract(pdf_file_path, page_builder.build())
 
 
-def extract(pdf_file_path: str, pages: List[int]) -> None:
+def _extract(pdf_file_path: str, pages: List[int]) -> None:
     pdf = PdfReader(pdf_file_path)
     pdf_writer = PdfWriter()
 
@@ -33,15 +33,3 @@ def extract(pdf_file_path: str, pages: List[int]) -> None:
         pdf_writer.write(f)
 
     return output_file_name
-
-
-if __name__ == "__main__":
-    # for example
-    pdf_file_path = "test.pdf"
-    pages = []
-    pages.append(PageSingle(single_page=56))
-    pages.append(PageSingle(single_page=91))
-    pages.append(PageSingle(single_page=111))
-    pages.append(PageRange(from_page=220, to_page=250))
-
-    extract_pdf(pdf_file_path, pages)
