@@ -34,8 +34,10 @@ def show_transformation():
                 to_page = st.session_state[f"to_{i}"]
                 pages.append(PageRange(from_page=from_page, to_page=to_page))
 
-        output_file_name = extract_pdf(pdf_file_path=pdf_file_path, pages=pages)
-        st.write(f"Completed extract and created as {output_file_name}")
+        with st.empty():
+            st.write(f"Extracting now. Please wait")
+            output_file_name = extract_pdf(pdf_file_path=pdf_file_path, pages=pages)
+            st.write(f"Completed extract and created as {output_file_name}")
 
     # Display rows with drop-down and delete button
     if st.session_state.rows:
