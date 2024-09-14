@@ -7,7 +7,7 @@ class PageBuilder:
     def __init__(self, pages: List = []):
         self._pages = pages
 
-    def add_page(self, page: int):
+    def add_page_single(self, page: int):
         self._pages.append(page)
         return PageBuilder(self._pages)
 
