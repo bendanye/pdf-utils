@@ -5,7 +5,12 @@ from PIL import Image, ImageDraw
 from natsort import natsorted
 
 
-def to_pdf(title: str, directories: List[str], image_order: str = "sequential") -> None:
+def to_pdf(
+    title: str,
+    directories: List[str],
+    image_order: str = "sequential",
+    cover_page: bool = True,
+) -> None:
     if image_order == "sequential":
         image_files = _sequential(directories)
     elif image_order == "alternate_between":
@@ -13,19 +18,27 @@ def to_pdf(title: str, directories: List[str], image_order: str = "sequential") 
     else:
         raise ValueError("Invalid image ordering")
 
-    cover_img = Image.new("RGB", (500, 230), color=(73, 109, 137))
-
-    d = ImageDraw.Draw(cover_img)
-    d.text((50, 50), title, fill=(255, 255, 255))
-
     images = [Image.open(f).convert("RGB") for f in image_files]
 
-    cover_img.save(
-        f"{title}.pdf",
-        resolution=100.0,
-        save_all=True,
-        append_images=images,
-    )
+    if cover_page:
+        cover_img = Image.new("RGB", (500, 230), color=(73, 109, 137))
+
+        d = ImageDraw.Draw(cover_img)
+        d.text((50, 50), title, fill=(255, 255, 255))
+
+        cover_img.save(
+            f"{title}.pdf",
+            resolution=100.0,
+            save_all=True,
+            append_images=images,
+        )
+    else:
+        images[0].save(
+            f"{title}.pdf",
+            resolution=100.0,
+            save_all=True,
+            append_images=images[1:],
+        )
 
 
 def _sequential(directories: List[str]):
